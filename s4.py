@@ -3,11 +3,9 @@ import os
 import subprocess
 import time
 from gtts import gTTS
-# import openai
 from openai import OpenAI
 
 API_KEY = '7432911185:AAFQpTAW2LBeclTNCYXc4GCL9fl43YgmAYA'
-# OPENAI_API_KEY = 'sk-eojihWMYuwlwO4oNjNMX8DbkkkBtLg7I'
 
 client = OpenAI(
     api_key="sk-eojihWMYuwlwO4oNjNMX8DbkkkBtLg7I",
@@ -15,8 +13,6 @@ client = OpenAI(
 )
 
 bot = telebot.TeleBot(API_KEY)
-
-# openai.api_key = OPENAI_API_KEY
 
 def convert_to_mobi(input_file, output_file):
     try:
@@ -34,18 +30,11 @@ def generate_text_with_gpt(filename, conversion_time):
             {"role": "user", "content": prompt}
         ]
     )
-    # response = openai.ChatCompletion.create(
-    #     model="gpt-3.5-turbo-1106",
-    #     messages=[
-    #         {"role": "system", "content": "You are a helpful assistant."},
-    #         {"role": "user", "content": prompt}
-    #     ]
-    # )
     response = chat_completion.choices[0].message.content
     return response
 
 def text_to_speech(text, filename='output.mp3'):
-    tts = gTTS(text=text, lang='en')
+    tts = gTTS(text=text, lang='ru')
     tts.save(filename)
 
 @bot.message_handler(commands=['start'])
