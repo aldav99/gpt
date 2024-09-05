@@ -1,7 +1,7 @@
-import telebot
 import os
 import subprocess
 import time
+import telebot
 from gtts import gTTS
 from openai import OpenAI
 
@@ -66,6 +66,7 @@ def handle_docs(message):
                 bot.send_voice(message.chat.id, audio)
 
             os.remove(output_file_path)
+            os.remove('output.mp3')
         else:
             bot.reply_to(message, "Не удалось конвертировать файл.")
 
